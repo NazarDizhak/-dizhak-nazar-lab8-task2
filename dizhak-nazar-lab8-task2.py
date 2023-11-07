@@ -29,7 +29,14 @@ def columns_check(board:str) -> bool:
 
 def colors_check(board:str) -> bool:
     '''checking colors for duplicate elements'''
-    pass
+    colors = []
+    for i in range(5):
+        temp_1 = [(board[8-i][i+j]) for j in range(4)]
+        temp_2 = [(board[8-i-j][i]) for j in range(4)]
+        colors.append(temp_1)
+        colors[-1].extend(temp_2)
+    res = any(colors[_].count(x) > 1 for _ in range(5) for x in colors[_] if x.isdigit())
+    return not res
 
 def validate_board(board:str) -> bool:
     '''taking all() from previous functions to validate a board'''
