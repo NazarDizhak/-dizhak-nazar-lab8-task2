@@ -39,8 +39,26 @@ def colors_check(board:str) -> bool:
     return not res
 
 def validate_board(board:str) -> bool:
-    '''taking all() from previous functions to validate a board'''
-    pass
+    '''taking all() from previous functions to validate a board
+    >>> board = ["**** ****",\
+                 "***1 ****",\
+                 "**  3****",\
+                 "* 4 1****",\
+                 "     9 5 ",\
+                 " 6  83  *",\
+                 "3   1  **",\
+                 "  8  2***",\
+                 "  2  ****"]
+
+    >>> validate_board(board)
+    False
+    '''
+    res_rows = rows_check(board)
+    res_columns = columns_check(board)
+    res_colors = colors_check(board)
+
+    return all([res_rows, res_columns, res_colors])
+
 
 if __name__ == '__main__':
     import doctest
