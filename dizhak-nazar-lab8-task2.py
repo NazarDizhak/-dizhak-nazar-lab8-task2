@@ -25,6 +25,7 @@ def rows_check(board:str) -> bool:
                 temp.append(elem)
             elif elem in temp:
                 res = False
+                break
     return res
 
 def columns_check(board:str) -> bool:
@@ -51,6 +52,7 @@ def columns_check(board:str) -> bool:
                 temp.append(elem)
             elif elem.isdigit() and elem in temp:
                 res = False
+                break
     return res
 
 def colors_check(board:str) -> bool:
@@ -69,9 +71,12 @@ def colors_check(board:str) -> bool:
     True
     '''
     colors = []
-    for i in range(5):
-        temp_1 = [(board[8-i][i+j]) for j in range(4)]
-        temp_2 = [(board[8-i-j][i]) for j in range(4)]
+    for i in range(9):
+        try:
+            temp_1 = [(board[8-i][i+j]) for j in range(4)]
+            temp_2 = [(board[8-i-j][i]) for j in range(1, 4)]
+        except IndexError:
+            continue
         colors.append(temp_1)
         colors[-1].extend(temp_2)
     res = any(colors[_].count(x) > 1 for _ in range(5) for x in colors[_] if x.isdigit())
@@ -97,8 +102,3 @@ def validate_board(board:str) -> bool:
     res_colors = colors_check(board)
 
     return all([res_rows, res_columns, res_colors])
-
-
-if __name__ == '__main__':
-    import doctest
-    print(doctest.testmod())
