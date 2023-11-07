@@ -16,7 +16,16 @@ def rows_check(board:str) -> bool:
 
 def columns_check(board:str) -> bool:
     '''checking columns for duplicate elements'''
-    pass
+    res = True
+    for col in range(9):
+        temp = []
+        for row in range(9):
+            elem = board[row][col]
+            if elem.isdigit() and elem not in temp:
+                temp.append(elem)
+            elif elem.isdigit() and elem in temp:
+                res = False
+    return res
 
 def colors_check(board:str) -> bool:
     '''checking colors for duplicate elements'''
