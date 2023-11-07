@@ -4,7 +4,15 @@ https://github.com/NazarDizhak/dizhak-nazar-lab8-task2.git
 '''
 def rows_check(board:str) -> bool:
     '''checking rows for duplicate elements'''
-    pass
+    res = True
+    for row in board:
+        temp = []
+        for elem in row:
+            if elem.isdigit() and elem not in temp:
+                temp.append(elem)
+            elif elem in temp:
+                res = False
+    return res
 
 def columns_check(board:str) -> bool:
     '''checking columns for duplicate elements'''
